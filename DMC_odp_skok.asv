@@ -1,0 +1,37 @@
+close all;
+load('odpowiedz.mat')
+
+k1 = 489;
+k2 = 700;
+
+y = y(k1: k2);
+u = u(k1:k2);
+
+n= k2 - k1;
+
+Upp=0;
+Ypp=0;
+
+u_step=1000;
+
+u(1:n)=Upp;
+y(1:n)=Ypp;
+
+u(7:n)=u_step;
+
+for k=1:n
+    s(k)=(y(k))/(u_step);
+end
+
+stairs(y);
+xlabel('$k$', 'Interpreter','latex');
+ylabel('$y$', 'Interpreter','latex');
+hold on
+stairs(u)
+
+yl = get(gca,'YTickLabel');
+set(gca, 'YTickLabel', strrep(yl(:),'.',','))
+
+set(groot,'defaultAxesTickLabelInterpreter','latex');  
+set(gcf,'units','points','position',[100 100 450 300]);
+% print('plots/zadanie_3/zad_3_odp_wej_wyj','-depsc','-r400');  % Zapisywanie wykresu
